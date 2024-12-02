@@ -48,11 +48,7 @@ async function obterDadosDoUsuario (nomeDoUsuario) {
     
     usuario.setInfo(respostaDoUsuario);
     usuario.setRepositories(respostaDoRepositorio);
-    usuario.setEvents(respostaDosEventos);
-
-    //
-    console.log(getEventos(nomeDoUsuario))
-    
+    usuario.setEvents(respostaDosEventos); 
     
     tela.renderUser(usuario);
 }

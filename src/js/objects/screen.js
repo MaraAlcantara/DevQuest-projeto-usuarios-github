@@ -13,11 +13,12 @@ const tela = {
                     </div>
                 </div>`
 
-        let itensDoRepositorio = '';
+        if (dadosDoUsuario.repositorios.length > 0) {
+            let itensDoRepositorio = '';
 
-        dadosDoUsuario.repositorios.forEach(repo =>
-            itensDoRepositorio +=
-            `<div class="repos">
+            dadosDoUsuario.repositorios.forEach(repo =>
+                itensDoRepositorio +=
+                `<div class="repos">
                 <li> <a href="${repo.html_url}" target="_blank">${repo.name}</a> </li>
                 <div class="painel">
                     <p>🍴 ${repo.forks_count} | </p>
@@ -26,10 +27,8 @@ const tela = {
                     <p>👩‍💻 ${repo.language ?? 'Sem Linguagem'}</p>
                 </div>
             </div>`
-            
-        );
+            );
 
-        if (dadosDoUsuario.repositorios.length > 0) {
             this.perfilDoUsuario.innerHTML +=
                 `<div class="repositorios sessao">
                                 <h2>Repositórios</h2>
