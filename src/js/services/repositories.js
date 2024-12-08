@@ -5,4 +5,4 @@ async function getRepositorios(nomeDoUsuario) {
     return await resposta.json();
 }
 
-export {getRepositorios};
+export { getRepositorios };

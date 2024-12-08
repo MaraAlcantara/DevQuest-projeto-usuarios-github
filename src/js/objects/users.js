@@ -8,7 +8,7 @@ const usuario = {
     repositorios: [],
     eventos: [],
 
-    setInfo (gitHubUser) {
+    setInfo(gitHubUser) {
         this.fotoUrl = gitHubUser.avatar_url;
         this.nome = gitHubUser.name;
         this.bio = gitHubUser.bio;
@@ -17,11 +17,11 @@ const usuario = {
         this.seguindo = gitHubUser.following;
     },
 
-    setRepositories (repositories) {
+    setRepositories(repositories) {
         this.repositorios = repositories;
     },
 
-    setEvents (events) {
+    setEvents(events) {
         this.eventos = events;
     }
 }

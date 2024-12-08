@@ -20,21 +20,21 @@ document.getElementById('nome-usuario').addEventListener('keyup', (e) => {
 
     if (teclaFoiPressionada) {
         if (validarEntradas(nomeUsuario)) return;
-        
+
         obterDadosDoUsuario(nomeUsuario);
-    }   
     }
+}
 )
 
-function validarEntradas (nomeUsuario) {
+function validarEntradas(nomeUsuario) {
     if (nomeUsuario.length === 0) {
         alert('Preencha o campo com o nome do usuário do GitHub');
         return true;
     }
 }
 
-async function obterDadosDoUsuario (nomeDoUsuario) {
-    
+async function obterDadosDoUsuario(nomeDoUsuario) {
+
     const respostaDoUsuario = await getUsuario(nomeDoUsuario);
 
     if (respostaDoUsuario.message === "Not Found") {
@@ -45,11 +45,11 @@ async function obterDadosDoUsuario (nomeDoUsuario) {
     const respostaDoRepositorio = await getRepositorios(nomeDoUsuario);
 
     const respostaDosEventos = await getEventos(nomeDoUsuario);
-    
+
     usuario.setInfo(respostaDoUsuario);
     usuario.setRepositories(respostaDoRepositorio);
-    usuario.setEvents(respostaDosEventos); 
-    
+    usuario.setEvents(respostaDosEventos);
+
     tela.renderUser(usuario);
 }
 

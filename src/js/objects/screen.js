@@ -11,7 +11,7 @@ const tela = {
                         <p>🤩 Seguidores: ${dadosDoUsuario.seguidores}</p>
                         <p>😍 Seguindo: ${dadosDoUsuario.seguindo} </p>
                     </div>
-                </div>`
+            </div>`
 
         if (dadosDoUsuario.repositorios.length > 0) {
             let itensDoRepositorio = '';
@@ -19,47 +19,46 @@ const tela = {
             dadosDoUsuario.repositorios.forEach(repo =>
                 itensDoRepositorio +=
                 `<div class="repos">
-                <li> <a href="${repo.html_url}" target="_blank">${repo.name}</a> </li>
-                <div class="painel">
-                    <p>🍴 ${repo.forks_count} | </p>
-                    <p>⭐ ${repo.stargazers_count} | </p>
-                    <p>👀 ${repo.watchers_count} | </p>
-                    <p>👩‍💻 ${repo.language ?? 'Sem Linguagem'}</p>
-                </div>
-            </div>`
+                    <li> <a href="${repo.html_url}" target="_blank">${repo.name}</a> </li>
+                    <div class="painel">
+                        <p>🍴 ${repo.forks_count} | </p>
+                        <p>⭐ ${repo.stargazers_count} | </p>
+                        <p>👀 ${repo.watchers_count} | </p>
+                        <p>👩‍💻 ${repo.language ?? 'Sem Linguagem'}</p>
+                    </div>
+                </div>`
             );
 
             this.perfilDoUsuario.innerHTML +=
                 `<div class="repositorios sessao">
-                                <h2>Repositórios</h2>
-                                <ul>${itensDoRepositorio}</ul>
-                            </div>`
+                    <h2>Repositórios</h2>
+                    <ul>${itensDoRepositorio}</ul>
+                </div>`
         }
 
         if (dadosDoUsuario.eventos.length > 0) {
             let itensDosEventos = '';
 
-            dadosDoUsuario.eventos.forEach(events => {
-                if (events.payload) {
-                    if (events.payload.commits) {
-                        const commits = events.payload.commits;
-                        const listaCommits = commits.map(commit => `<span>${commit.message}</span>`);
-
-                        itensDosEventos += `<p><span class="nome-evento">${events.repo.name} - </span> ${listaCommits}</p>`;
-                    } else {
-                        itensDosEventos += `<p><span class="nome-evento">${events.repo.name} - </span> Sem mensagem de Commit</p>`
-                    }
+            dadosDoUsuario.eventos.forEach(element => {
+                if (element.type === 'PushEvent') {
+                    itensDosEventos += `<li>
+                        <h3 class="nome-evento">${element.repo.name}</h3>
+                        <p> -- ${element.payload.commits[0].message}</p>
+                    </li>`
+                } else {
+                    itensDosEventos += `<li>
+                        <h3 class="nome-evento">${element.repo.name}</h3>
+                        <p> -- Criado um ${element.payload.ref_type}</p>
+                    </li>`
                 }
-            })
-
+            });
 
             this.perfilDoUsuario.innerHTML +=
                 `<div class="eventos">
-                                <h2>Eventos</h2>
-                                <p>${itensDosEventos}</p>
-                            </div>`
+                    <h2>Eventos</h2>
+                    <p>${itensDosEventos}</p>
+                </div>`
         };
-
     },
 
     renderNotFound() {
